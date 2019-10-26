@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bottometh2init
+  namespace: default
+spec:
+  backoffLimit: 6
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        job-name: bottometh2init
+    spec:
+      containers:
+      - args:
+        - accounts
+        - create
+        - --keystore-path=/data
+        - --password=thisisfun
+        image: gcr.io/prysmaticlabs/prysm/validator:latest
+        imagePullPolicy: Always
+        name: bottometh2init
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /data
+          name: bottometh2
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: bottometh2
+        persistentVolumeClaim:
+          claimName: bottometh2pvc
