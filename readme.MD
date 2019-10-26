@@ -109,7 +109,7 @@ If you want to add another computer to the Rancher cluster, then follow these st
 
     `rancher kubectl delete -f hello2/hello2_d.yml -f hello2/hello2_pvc.yml -f hello2/hello2_pv.yml`
 
-- Spin up ethereum nodes (note: added node affinity so we keep the persisted volume on same host). Note: topeth1 will download entire blockchain.
+- Spin up ethereum nodes (note: added node affinity so we keep the persisted volume on same host)
 
     ```
     rancher kubectl apply -f eth1/topeth1_d.yml -f eth1/topeth1_pvc.yml -f eth1/topeth1_pv.yml

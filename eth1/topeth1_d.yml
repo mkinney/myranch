@@ -47,11 +47,6 @@ spec:
           - '*'
           - --rpcaddr
           - '0.0.0.0'
-          - --rpcapi
-          - db,eth,net,web3,personal,admin,debug
-          - --syncmode
-          - full
-          - --gcmode=archive
         ports:
         - containerPort: 30303
           hostPort: 30303
