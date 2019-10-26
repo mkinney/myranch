@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hello2pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: /persist/hello2
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain
+  storageClassId: null
+  volumeMode: Filesystem
