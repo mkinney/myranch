@@ -42,8 +42,8 @@ The following steps quickly deploy a Rancher Server on `bare metal` (aka a compu
           - 8.8.8.8
 
 	ssh_authorized_keys:
-    - ssh-rsa AAAAB3NzaC...jJw== XXX
-  ```   
+          - ssh-rsa AAAAB3NzaC...jJw== XXX
+        ```   
 
 6. Install Rancher OS to the hard drive. Run `sudo ros install -i rancher/os:latest -c cloud-config.yml -d /dev/sda` (Note: This will wipe out any existing operating system on this computer.)
 
@@ -59,7 +59,8 @@ The following steps quickly deploy a Rancher Server on `bare metal` (aka a compu
 
 12. Paste the text from prior step into the window from step 8 above. It will take a few minutes for all of the pieces to start.
 
-### Want to add another worker node?
+
+## Want to add another worker node?
 
 If you want to add another computer to the Rancher cluster, then follow these steps.
 
