@@ -1,6 +1,6 @@
 ## My Ranch notes
 
-These are my notes on experimenting with Rancher Kubernetes Engine (RKE). If you have the `Kubeconfig` setup and the `kubectl` command installed, you do not need to use the `rancher` prefix below. I have two computers for Rancher: top and bottom. (One server physically sits on top of the other.) I don't expose this internal network to the outside world. These two computers are running the RancherOS on bare metal.
+These are my notes on experimenting with Rancher Kubernetes Engine (RKE). If you have the `Kubeconfig` setup and the `kubectl` command installed, you do not need to use the `rancher` prefix below. I have three computers for Rancher: top, bottom, and nuc1. (One server physically sits on top of the other. The third is an Intel NUC.) I don't expose this internal network to the outside world. These two computers are running the RancherOS on bare metal.
 
 ## Bare metal quick start
 
@@ -71,6 +71,26 @@ If you want to add another computer to the Rancher cluster, then follow these st
 3. Run the command from step 2 into the ssh'd connection to the second computer.
 
 4. The node should now be added to the cluster.
+
+## Add another worker node on NUC
+
+1. Ensure USB is bootable on NUC. F2 for to change bios. Go to "Advanced" menu. Under "Devices and Peripherals" > "SATA" menu, change "Chipset SATA Mode" to "AHCI". On the "Boot" > "Boot Priority" menu, in the "Legacy Boot Priority" pane, Legacy Boot is disabled (unchecked). Ensure "USB" is checked for bootable device.
+
+2. Follow steps 1-5 in "Getting Started" above (before the `sudo ros install` step) run these steps:
+
+    sudo fdisk /dev/nvme0n1
+    delete any existing partitions with “d” till all deleted
+    new gpt "g"
+    new partition "n"
+    No "N"
+    write "w"
+    sudo mkfs.ext4 -F -i 4096 -O ^64bit -L RANCHER_STATE /dev/nvme0n1p1
+
+3. Install Rancher to the NVME partition:
+
+    sudo ros install -t gptsyslinux -c cloud-config.yml -d /dev/nvme0n1 -p /dev/nvme0n1p1
+
+4. Follow rest of steps from adding another worker node.
 
 
 ## Rancher CLI Notes
