@@ -11,7 +11,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi
+      storage: 20Gi
   storageClassName: ""
   volumeMode: Filesystem
   volumeName: bottometh2

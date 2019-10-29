@@ -44,7 +44,6 @@ spec:
           - --no-genesis-delay
           - --init-sync-no-verify
           - --grpc-gateway-port=7000
-          - foo
         ports:
         - containerPort: 4000
           hostPort: 4000
