@@ -5,6 +5,7 @@ See https://prylabs.net/participate
 - Deploy persistent volume, persistent volume claim, and job to create the raw transaction data to activate validator client
 
     `kubectl apply -f bottometh2_pv.yml -f bottometh2_pvc.yml -f bottometh2_j.yml`
+    `kubectl apply -f topeth2_pv.yml -f topeth2_pvc.yml -f topeth2_j.yml`
 
 - Wait until job (bottometh2init) is complete (not 100% sure need to do this, just following their instructions)
 
@@ -17,6 +18,7 @@ See https://prylabs.net/participate
 - Deploy the beacon chain
 
     `kubectl apply -f bottometh2_d.yml`
+    `kubectl apply -f topeth2_d.yml`
 
 - Wait for chain to sync (can take a couple of hours)
 
@@ -25,7 +27,9 @@ See https://prylabs.net/participate
 - Deploy validator
 
     `kubectl apply -f bottometh2_d2.yml`
+    `kubectl apply -f topeth2_d2.yml`
 
 - Remove all eth2:
 
     `delete -f bottometh2_d.yml -f bottometh2_d2.yml -f bottometh2_pv.yml -f bottometh2_j.yml -f bottometh2_pvc.yml`
+    `delete -f topeth2_d.yml -f topeth2_d2.yml -f topeth2_pv.yml -f topeth2_j.yml -f topeth2_pvc.yml`

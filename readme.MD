@@ -12,7 +12,6 @@ The following steps quickly deploy a Rancher Server on `bare metal` (aka a compu
 - Computer allows access to boot menu, has at least one hard drive, and network has DHCP server
 - Computer's first hard drive can be erased
 
-
 ## Getting Started
 
 1. Boot PC using bootable media (may have to press F12 to get to the boot menu, then select the bootable device)
@@ -73,6 +72,8 @@ If you want to add another computer to the Rancher cluster, then follow these st
 4. The node should now be added to the cluster.
 
 ## Add another worker node on NUC
+
+Note: I upgraded the NUC bios from 29 to 58, and "Legacy Boot" was removed. So, I need to figure out how to boot UEFI. It does not appear that Rancher has that enabled.
 
 1. Ensure USB is bootable on NUC. F2 for to change bios. Go to "Advanced" menu. Under "Devices and Peripherals" > "SATA" menu, change "Chipset SATA Mode" to "AHCI". On the "Boot" > "Boot Priority" menu, in the "Legacy Boot Priority" pane, Legacy Boot is disabled (unchecked). Ensure "USB" is checked for bootable device.
 

@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    workload.user.cattle.io/workloadselector: deployment-default-topeth2val
+  name: topeth2val
+  namespace: default
+  selfLink: /apis/apps/v1/namespaces/default/deployments/topeth2val
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-topeth2val
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-topeth2val
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - top
+      containers:
+      - image: gcr.io/prysmaticlabs/prysm/validator:latest 
+        imagePullPolicy: Always
+        name: topeth2val
+        args: 
+          - --beacon-rpc-provider=top.mikekinney.org:4000
+          - --keystore-path=/data
+          - --password=thisisfun
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /data
+          name: topeth2
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: topeth2
+        persistentVolumeClaim:
+          claimName: topeth2pvc
