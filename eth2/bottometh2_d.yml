@@ -41,7 +41,6 @@ spec:
         name: bottometh2
         args: 
           - --datadir=/data
-          - --no-genesis-delay
           - --init-sync-no-verify
           - --grpc-gateway-port=7000
         ports:

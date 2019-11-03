@@ -4,17 +4,17 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    workload.user.cattle.io/workloadselector: deployment-default-topeth2
-  name: topeth2
+    workload.user.cattle.io/workloadselector: deployment-default-nuc1eth2val
+  name: nuc1eth2val
   namespace: default
-  selfLink: /apis/apps/v1/namespaces/default/deployments/topeth2
+  selfLink: /apis/apps/v1/namespaces/default/deployments/nuc1eth2val
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: deployment-default-topeth2
+      workload.user.cattle.io/workloadselector: deployment-default-nuc1eth2val
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -24,7 +24,7 @@ spec:
     metadata:
       annotations:
       labels:
-        workload.user.cattle.io/workloadselector: deployment-default-topeth2
+        workload.user.cattle.io/workloadselector: deployment-default-nuc1eth2val
     spec:
       affinity:
         nodeAffinity:
@@ -34,24 +34,15 @@ spec:
               - key: kubernetes.io/hostname
                 operator: In
                 values:
-                - top
+                - nuc1
       containers:
-      - image: gcr.io/prysmaticlabs/prysm/beacon-chain:latest
+      - image: gcr.io/prysmaticlabs/prysm/validator:latest 
         imagePullPolicy: Always
-        name: topeth2
+        name: nuc1eth2val
         args: 
-          - --datadir=/data
-          - --init-sync-no-verify
-          - --grpc-gateway-port=7000
-        ports:
-        - containerPort: 4000
-          hostPort: 4000
-          name: 4000tcp4000
-          protocol: TCP
-        - containerPort: 7000
-          hostPort: 7000
-          name: 7000tcp7000
-          protocol: TCP
+          - --beacon-rpc-provider=nuc1.mikekinney.org:4000
+          - --keystore-path=/data
+          - --password=thisisfun
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
@@ -65,13 +56,13 @@ spec:
         tty: true
         volumeMounts:
         - mountPath: /data
-          name: topeth2
+          name: nuc1eth2
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: topeth2
+      - name: nuc1eth2
         persistentVolumeClaim:
-          claimName: topeth2pvc
+          claimName: nuc1eth2pvc
