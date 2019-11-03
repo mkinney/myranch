@@ -34,6 +34,6 @@ See https://prylabs.net/participate
 
 - Remove all eth2:
 
-    `delete -f bottometh2_d.yml -f bottometh2_d2.yml -f bottometh2_pv.yml -f bottometh2_j.yml -f bottometh2_pvc.yml`
-    `delete -f topeth2_d.yml -f topeth2_d2.yml -f topeth2_pv.yml -f topeth2_j.yml -f topeth2_pvc.yml`
-    `delete -f nuc1eth2_d.yml -f nuc1eth2_d2.yml -f nuc1eth2_pv.yml -f nuc1eth2_j.yml -f nuc1eth2_pvc.yml`
+    `kubectl delete -f bottometh2_d.yml -f bottometh2_d2.yml -f bottometh2_pv.yml -f bottometh2_j.yml -f bottometh2_pvc.yml`
+    `kubectl delete -f topeth2_d.yml -f topeth2_d2.yml -f topeth2_pv.yml -f topeth2_j.yml -f topeth2_pvc.yml`
+    `kubectl delete -f nuc1eth2_d.yml -f nuc1eth2_d2.yml -f nuc1eth2_pv.yml -f nuc1eth2_j.yml -f nuc1eth2_pvc.yml`
