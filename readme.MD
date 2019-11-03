@@ -284,4 +284,8 @@ Note: Do not reboot when prompted at the end of the installation. If you do rebo
 
     `rancher kubectl delete -f hello2/hello2_d.yml -f hello2/hello2_pvc.yml -f hello2/hello2_pv.yml`
 
-- Deploy eth1 or eth2 nodes
+# What else can you do with RKE?
+
+- Spin up a Docker Private Registry. See [Readme](private_registry/readme.MD) in `private_registry` directory.
+- Deploy Ethereum v1 Geth node. See [Readme](eth1/readme.MD) in `eth1` directory.
+- Deploy Ethereum v2 prysm node. See [Readme](eth2/readme.MD) in `eth2` directory.
